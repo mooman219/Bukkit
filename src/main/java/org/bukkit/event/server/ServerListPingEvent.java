@@ -8,10 +8,15 @@ import org.bukkit.event.HandlerList;
  * Called when a server list ping is coming in.
  */
 public class ServerListPingEvent extends ServerEvent {
+    // Cow Start [ Make the ServerListPingEvent more versatile ]
+    public void setNumPlayers(int numPlayers) {
+        this.numPlayers = numPlayers;
+    }
+    // Cow End
     private static final HandlerList handlers = new HandlerList();
     private final InetAddress address;
     private String motd;
-    private final int numPlayers;
+    private int numPlayers; // Cow Modify [ Make the ServerListPingEvent more versatile ]
     private int maxPlayers;
 
     public ServerListPingEvent(final InetAddress address, final String motd, final int numPlayers, final int maxPlayers) {

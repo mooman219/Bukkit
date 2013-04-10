@@ -10,6 +10,22 @@ import org.bukkit.event.HandlerList;
  * This event is asynchronous, and not run using main thread.
  */
 public class AsyncPlayerPreLoginEvent extends Event {
+    // Cow Start [ Player data pass around ] [ Make the AsyncPlayerPreLoginEvent more versatile  ]
+    private Object pendingConnection;
+    public AsyncPlayerPreLoginEvent(final String name, final InetAddress ipAddress, final boolean allowed, Object pendingConnection) {
+        this(name, ipAddress);
+        this.pendingConnection = pendingConnection;
+        if(allowed) {
+            this.result = Result.ALLOWED;
+        } else {
+            this.result = Result.KICK_VERIFY;
+            this.message = "Failed to verify username!";
+        }
+    }
+    public Object getPendingConnection() {
+        return pendingConnection;
+    }
+    // Cow End
     private static final HandlerList handlers = new HandlerList();
     private Result result;
     private String message;
@@ -165,6 +181,12 @@ public class AsyncPlayerPreLoginEvent extends Event {
          * The player is not allowed to log in, due to them not being on the white list
          */
         KICK_WHITELIST,
+        // Cow Start [ Make the AsyncPlayerPreLoginEvent more versatile ]
+        /**
+         * The player's username was not verified with Mojang
+         */
+        KICK_VERIFY,
+        // Cow End
         /**
          * The player is not allowed to log in, for reasons undefined
          */

@@ -129,6 +129,12 @@ public class PlayerPreLoginEvent extends Event {
          * The player is not allowed to log in, due to them not being on the white list
          */
         KICK_WHITELIST,
+        // Cow Start [ Make the AsyncPlayerPreLoginEvent more versatile ]
+        /**
+         * The player's username was not verified with Mojang
+         */
+        KICK_VERIFY,
+        // Cow End
         /**
          * The player is not allowed to log in, for reasons undefined
          */
